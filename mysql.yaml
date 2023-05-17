@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql_bts
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password    
+      MYSQL_DATABASE: BTS
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+    networks:
+      - big-data
+    
+networks:
+  big-data:
+    external: true

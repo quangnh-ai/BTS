@@ -1,0 +1,6 @@
+data
+.ipynb_checkpoints
+*.csv
+jupyterlab/config/lab
+jupyterlab/config/serverconfig
+jupyterlab/config/migrated

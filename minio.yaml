@@ -1,0 +1,19 @@
+version: '3'
+services:
+  minio-storage:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - 9000:9000
+      - 9090:9090
+    volumes:
+      - ./env/minio:/etc/config.env 
+      - ./data/minio:/mnt/data
+    environment:
+      - MINIO_CONFIG_ENV_FILE=/etc/config.env
+    command: minio server --console-address ":9090"
+    networks:
+      - big-data
+networks:
+  big-data:
+    external: true
