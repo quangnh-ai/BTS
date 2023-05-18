@@ -8,7 +8,7 @@ services:
       - 8080:8080
       - 7077:7077
     volumes:
-      - ./workspace/note:/opt/shared_storage
+      - ./config/spark:/opt/spark_config
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_MODE=master
@@ -32,8 +32,6 @@ services:
       - SPARK_EXECUTOR_MEMORY=4G
       - SPARK_MODE=worker
       - SPARK_LOCAL_IP=spark-worker-1
-    volumes:
-      - ./workspace:/opt/shared_storage
     depends_on:
       - spark-master
     networks:
@@ -53,8 +51,6 @@ services:
       - SPARK_EXECUTOR_MEMORY=4G
       - SPARK_MODE=worker
       - SPARK_LOCAL_IP=spark-worker-2
-    volumes:
-      - ./workspace:/opt/shared_storage
     depends_on:
       - spark-master
     networks:
