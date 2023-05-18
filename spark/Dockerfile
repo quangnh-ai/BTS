@@ -34,6 +34,8 @@ RUN mkdir -p ${SPARK_LOG_DIR} && \
     ln -sf /dev/stdout ${SPARK_MASTER_LOG} && \
     ln -sf /dev/stdout ${SPARK_WORKER_LOG}
 
+RUN wget -P /opt/spark/jars https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar
+
 COPY ./start-spark.sh /opt/spark/
 
 CMD ["bash", "start-spark.sh"]
