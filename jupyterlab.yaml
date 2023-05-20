@@ -1,7 +1,7 @@
 version: '3'
 services:
   jupyterlab:
-    image: jupyterlab:python-3.11.3-pyspark-3.3.2
+    image: jupyterlab:python-3.10.11-pyspark-3.2.1
     container_name: jupyterlab
     ports:
       - 8888:8888
