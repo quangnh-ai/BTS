@@ -1,0 +1,3 @@
+minio
+opencv-python
+numpy
