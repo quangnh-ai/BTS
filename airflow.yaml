@@ -2,9 +2,9 @@ version: "3"
 services:
   postgres:
     image: postgres:13.1
-    container_name: postgres-airlfow
+    container_name: postgres
     env_file:
-      - ./AirFlowLocalExecutor/.env
+      - ./config/airflow/airflow.env
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
@@ -15,17 +15,17 @@ services:
       - "5432:5432"
 
   airflow:
-    build: ./AirFlowLocalExecutor/
-    image: piyush/airflow-2.1.0
+    image: airflow:2.6.1-python-3.10
+    container_name: airflow
     env_file:
-      - ./AirFlowLocalExecutor/.env
+      - ./config/airflow/airflow.env
     restart: unless-stopped
     ports:
     - "9099:8080"
     depends_on:
     - postgres
     volumes:
-      - ./workspace/AirFlow/dags:/opt/airflow/dags    
+      - ./workspace/airflow/dags:/opt/airflow/dags    
 
 volumes:
   postgres:
