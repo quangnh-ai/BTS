@@ -4,3 +4,4 @@ data
 jupyterlab/config/lab
 jupyterlab/config/serverconfig
 jupyterlab/config/migrated
+__pycache__
