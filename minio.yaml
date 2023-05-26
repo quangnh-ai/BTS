@@ -7,7 +7,7 @@ services:
       - 9000:9000
       - 9090:9090
     volumes:
-      - ./config/minio:/etc/config.env 
+      - ./config/minio/minio.env:/etc/config.env 
       - ./data/minio:/mnt/data
     environment:
       - MINIO_CONFIG_ENV_FILE=/etc/config.env

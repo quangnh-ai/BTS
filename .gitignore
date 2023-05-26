@@ -5,3 +5,4 @@ jupyterlab/config/lab
 jupyterlab/config/serverconfig
 jupyterlab/config/migrated
 __pycache__
+*.jar

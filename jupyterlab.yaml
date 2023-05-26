@@ -8,7 +8,7 @@ services:
       - 4040-4045:4040-4045
     volumes:
       - ./workspace/jupyterlab:/opt/jupyterlab
-      - ./jupyterlab/config:/root/.jupyter
+      - ./config/jupyterlab:/root/.jupyter
     networks:
       - big-data
     
