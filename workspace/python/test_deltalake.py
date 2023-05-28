@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from datetime import date
-from utils.common import create_spark_session
+# from utils.common import create_spark_session
 
 today = date.today().strftime("%b-%d-%Y")
 
@@ -10,6 +10,7 @@ if __name__ == "__main__":
     spark_session = (
         SparkSession.builder
         .appName('Test Deltalake')
+        .master('spark://spark-master:7077') 
         .config("spark.executor.memory", '2G')
         .config("spark.executor.cores", '2')
         .config("spark.driver.memory", '2G')
@@ -17,9 +18,9 @@ if __name__ == "__main__":
         .config("spark.hadoop.fs.s3a.access.key", 'minioadmin')
         .config("spark.hadoop.fs.s3a.secret.key", 'minioadmin')
         .config("fs.s3a.endpoint", "http://minio:9000")
+        .config("fs.s3a.connection.ssl.enabled", "false")
         .config("spark.hadoop.fs.s3a.path.style.access", "true")
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
-        .config("fs.s3a.connection.ssl.enabled", "false")
         .config('spark.hadoop.fs.s3a.aws.credentials.provider', 'org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider')
         .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
         .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
