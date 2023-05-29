@@ -1,4 +1,4 @@
-FROM python-jdk:python-3.11.3-jdk-11.10.16
+FROM spark:3.3.2-hadoop-3
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y install ffmpeg \
