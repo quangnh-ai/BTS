@@ -1,0 +1,64 @@
+version: '3'
+services:
+
+  kafka-ui:
+    image: consdata/kouncil:latest
+    environment:
+      bootstrapServers: kafka1:9092,kafka2:9092
+      kouncil.auth.active-provider: "inmemory"
+    ports:
+      - 8080:8080
+
+  kafka1: # Kafka Kraft node1
+    hostname: kafka1
+    container_name: kafka1
+    image: confluentinc/cp-kafka:7.3.3
+    ports:
+      - "39094:39094"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENERS: BROKER://kafka1:9092,EXTERNAL://kafka1:39094,CONTROLLER://kafka1:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka1:9092,EXTERNAL://kafka1:39094
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+    volumes:
+      - ./config/kafka/kafka_update_run.sh:/tmp/update_run.sh
+      - ./config/kafka/.clusterID:/tmp/clusterID
+    command: "sh -c '/tmp/update_run.sh && /etc/confluent/docker/run'"
+
+  kafka2: # Kafka kraft node2
+    hostname: kafka2
+    container_name: kafka2
+    image: confluentinc/cp-kafka:7.3.3
+    ports:
+      - "39095:39095"
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_LISTENERS: BROKER://kafka2:9092,EXTERNAL://kafka2:39095,CONTROLLER://kafka2:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka2:9092,EXTERNAL://kafka2:39095
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+    volumes:
+      - ./config/kafka/kafka_update_run.sh:/tmp/update_run.sh
+      - ./config/kafka/.clusterID:/tmp/clusterID
+    command: "sh -c '/tmp/update_run.sh && /etc/confluent/docker/run'"
+
+networks:
+  big-data:
+    external: true
