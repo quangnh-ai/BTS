@@ -24,7 +24,7 @@ docker compose -f {name-to-file-compose-file}.yaml -f -d
 
   - Install jar files needed for our spark project
 
-## Information and accout of Platform
+## Information and accout of the platform
 
 - **Spark master UI:**    http://localhost:8080
 - **Spark worker a UI:**  http://localhost:9091
