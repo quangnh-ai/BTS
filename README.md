@@ -19,9 +19,7 @@ docker build -t jupyterlab:python-3.10.11-spark-3.3.2 .docker/jupyterlab
 docker compose -f {name-to-file-compose-file}.yaml -f -d
 ```
   - Create a bucket in minio to store our data (name it datalake)
-
-  - Create a Postgres database (name it CarParts and use CarParts.sql file to create tables)
-
+  - Check and create folder "dag" in "workspace" folder if it not exists
   - Install jar files needed for our spark project
 
 ## Information and accout of the platform
