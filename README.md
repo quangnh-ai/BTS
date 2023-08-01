@@ -16,7 +16,7 @@ docker build -t jupyterlab:python-3.10.11-spark-3.3.2 .docker/jupyterlab
 3. Deploy Platform
 
 ```bash
-docker compose -f {name-to-file-compose-file}.yaml -f -d
+docker compose -f {name-to-file-compose-file}.yaml up -d
 ```
   - Create a bucket in minio to store our data (name it datalake)
   - Check and create folder `dag` in `workspace` folder if it not exists
