@@ -30,7 +30,7 @@ docker compose -f {name-to-file-compose-file}.yaml up -d
 - **Minio:**  http://localhost:9090 (username: `minioadmin`, password: `minioadmin`)
 - **AirFlowLocalExecutor:** http://localhost:9099/login/  (username: `admin`, password: `airflow`)
 - **MySQL:** http://localhost:3306  (username: `user`, password: `password`)
-- **JupyterLab:** http://localhost:8888  (username: `user`, password: `password`)
+- **JupyterLab:** http://localhost:8888  (password: `admin123`)
 
 ## Example for spark-submit
 ```
