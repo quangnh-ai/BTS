@@ -1,31 +1,62 @@
-version: "3"
+version: '3'
 services:
+  redis:
+    image: redis:alpine3.18
+    container_name: redis
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass 123456
+  
   postgres:
     image: postgres:13.1
-    container_name: postgres
-    env_file:
-      - ./config/airflow/airflow.env
+    container_name: postgres_metadata
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
-    volumes:
-      - postgres:/data/postgres
     ports:
-      - "5432:5432"
-
-  airflow:
-    image: airflow:2.6.1-python-3.10
-    container_name: airflow
+      - 5432:5432
+  
+  airflow_webserver:
+    image: airflow:2.7.1-python3.10
+    container_name: airflow_webserver
     env_file:
-      - ./config/airflow/airflow.env
-    restart: unless-stopped
-    ports:
-    - "9099:8080"
+      - ./airflow.env
     depends_on:
-    - postgres
-    volumes:
-      - ./workspace/airflow/dags:/opt/airflow/dags    
+      - redis
+      - postgres
+    ports:
+      - 8080:8080
+    command: webserver
 
-volumes:
-  postgres:
+  
+  airflow_scheduler:
+    image: airflow:2.7.1-python3.10
+    container_name: airflow_scheduler
+    env_file:
+      - ./airflow.env
+    depends_on:
+      - airflow_webserver
+    command: scheduler
+  
+  airflow_flower:
+    image: airflow:2.7.1-python3.10
+    container_name: airflow_flower
+    env_file:
+      - ./airflow.env
+    ports:
+      - 5555:5555
+    depends_on:
+      - redis
+    command: flower
+
+  airflow_worker:
+    image: airflow:2.7.1-python3.10
+    container_name: airflow_worker
+    env_file:
+      - ./airflow.env
+    depends_on:
+      - airflow_scheduler
+    command: worker
+
+
