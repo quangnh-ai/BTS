@@ -1,5 +1,4 @@
-FROM python:3.10.13-slim
-
+FROM python-jdk:python-3.10.11-jdk-11.10.16
 
 ENV AIRFLOW_HOME=/airflow
 ENV PYTHON_VERSION=3.10
@@ -18,6 +17,10 @@ RUN pip install "apache-airflow[redis, celery, ssh, postgres]==${AIRFLOW_VERSION
 
 RUN mkdir /airflow
 WORKDIR /airflow
+
+COPY ./requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
 RUN mkdir logs
 RUN mkdir dags
 RUN mkdir plugins

@@ -18,10 +18,10 @@ services:
       - 5432:5432
   
   airflow_webserver:
-    image: airflow:2.7.1-python3.10
+    image: airflow:2.7.1-python3.10.11
     container_name: airflow_webserver
     env_file:
-      - ./airflow.env
+      - ./config/airflow/airflow.env
     depends_on:
       - redis
       - postgres
@@ -31,19 +31,19 @@ services:
 
   
   airflow_scheduler:
-    image: airflow:2.7.1-python3.10
+    image: airflow:2.7.1-python3.10.11
     container_name: airflow_scheduler
     env_file:
-      - ./airflow.env
+      - ./config/airflow/airflow.env
     depends_on:
       - airflow_webserver
     command: scheduler
   
   airflow_flower:
-    image: airflow:2.7.1-python3.10
+    image: airflow:2.7.1-python3.10.11
     container_name: airflow_flower
     env_file:
-      - ./airflow.env
+      - ./config/airflow/airflow.env
     ports:
       - 5555:5555
     depends_on:
@@ -51,10 +51,10 @@ services:
     command: flower
 
   airflow_worker:
-    image: airflow:2.7.1-python3.10
+    image: airflow:2.7.1-python3.10.11
     container_name: airflow_worker
     env_file:
-      - ./airflow.env
+      - ./config/airflow/airflow.env
     depends_on:
       - airflow_scheduler
     command: worker
