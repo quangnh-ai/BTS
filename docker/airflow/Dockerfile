@@ -31,4 +31,4 @@ RUN chown -R airflow: ${AIRFLOW_HOME}
 USER airflow
 
 COPY ./scripts/entrypoint.sh entrypoint.sh
-ENTRYPOINT [ "/airflow/entrypoint.sh" ]
+ENTRYPOINT ["bash", "/airflow/entrypoint.sh" ]
