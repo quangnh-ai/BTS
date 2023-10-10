@@ -1,4 +1,7 @@
 numpy==1.24.3
 minio==7.1.15
-pyspark==3.3.2
+pyspark==3.4.1
 psycopg2-binary==2.9.6
+sqlalchemy== 1.4.24
+apache-airflow-providers-http==4.5.2
+apache-airflow-providers-apache-spark==4.1.5

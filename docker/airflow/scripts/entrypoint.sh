@@ -18,7 +18,7 @@ case "$1" in
         airflow scheduler
         ;;
     worker)
-        rm -rf /airflow/airflow-worker.pid
+        rm -rf /opt/airflow/airflow-worker.pid
         airflow celery worker
         ;;
     flower)
