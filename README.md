@@ -10,7 +10,7 @@ docker build -t python-jdk:python-3.10.11-jdk-11.10.16 ./docker/base_image
 2. Build Spark, jupyterlab and Airflow Local Executor docker image
 ```bash
 docker build -t spark:3.3.2-hadoop-3 ./docker/spark
-docker build -t airflow:2.6.1-python-3.10 ./docker/airflow
+docker build -t airflow:2.7.1-python-3.10.11 ./docker/airflow
 docker build -t jupyterlab:python-3.10.11-spark-3.3.2 ./docker/jupyterlab
 ```
 3. Deploy Platform
