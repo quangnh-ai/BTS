@@ -12,6 +12,11 @@ then
 
 cd /opt/spark/bin && ./spark-class org.apache.spark.deploy.worker.Worker --webui-port $SPARK_WORKER_WEBUI_PORT $SPARK_MASTER_URL >> $SPARK_WORKER_LOG
 
+elif [ "$SPARK_MODE" = "history" ];
+then
+
+cd /opt/spark/bin && ./spark-class org.apache.spark.deploy.history.HistoryServer >> $SPARK_HISTORY_LOG
+
 elif [ "$SPARK_MODE" = "submit" ];
 then
 

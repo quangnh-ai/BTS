@@ -31,5 +31,5 @@ RUN useradd -ms /bin/bash airflow
 RUN chown -R airflow: ${AIRFLOW_HOME}
 USER airflow
 
-COPY ./scripts/entrypoint.sh entrypoint.sh
+COPY ./entrypoint.sh entrypoint.sh
 ENTRYPOINT [ "/opt/airflow/entrypoint.sh" ]

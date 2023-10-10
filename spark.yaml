@@ -2,14 +2,15 @@ version: '3'
 services:
 
   spark-master:
-    image: spark:3.3.2-hadoop-3
+    image: spark:3.4.1-hadoop-3
     container_name: spark-master
     ports:
       - 8080:8080
       - 7077:7077
     volumes:
-      - ./config/spark:/opt/spark_config
+      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
       - ./workspace/pyspark:/opt/workspace
+      - ./logs/spark/spark-events:/opt/spark/spark-events
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_MODE=master
@@ -17,49 +18,67 @@ services:
       - big-data    
   
   spark-worker-1:
-    image: spark:3.3.2-hadoop-3
+    image: spark:3.4.1-hadoop-3
     container_name: spark-worker-1
     ports:
-      - 9091:8080
+      - 9090:9090
       - 7000:7000
     # If you find an environment variable that does not exist in Dockerfile and start-spark.sh, please read the official doc how to deploy spark standalone mode
     # in this case, i used SPARK_WORKER_CORES, SPARK_WORKER_MEMORY in this url: https://spark.apache.org/docs/latest/spark-standalone.html 
-    # (at the time i write this docker-compose, version 3.3.1 is the latest version of spark)
+    # (at the time i write this docker-compose, version 3.4.1 is the latest version of spark)
     environment:
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=4G
-      - SPARK_DRIVER_MEMORY=4G
-      - SPARK_EXECUTOR_MEMORY=4G
       - SPARK_MODE=worker
+      - SPARK_WORKER_WEBUI_PORT=9090
+      - SPARK_WORKER_PORT=7000
       - SPARK_LOCAL_IP=spark-worker-1
     volumes:
-      - ./config/spark:/opt/spark_config
+      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+      - ./logs/spark/spark-events:/opt/spark/spark-events
     depends_on:
       - spark-master
     networks:
       - big-data
   
   spark-worker-2:
-    image: spark:3.3.2-hadoop-3
+    image: spark:3.4.1-hadoop-3
     container_name: spark-worker-2
     ports:
-      - 9092:8080
-      - 7001:7000
+      - 9091:9091
+      - 7001:7001
     environment:
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_CORES=3
+      - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=4G
-      - SPARK_DRIVER_MEMORY=4G
-      - SPARK_EXECUTOR_MEMORY=4G
       - SPARK_MODE=worker
+      - SPARK_WORKER_WEBUI_PORT=9091
+      - SPARK_WORKER_PORT=7001
       - SPARK_LOCAL_IP=spark-worker-2
     volumes:
-      - ./config/spark:/opt/spark_config
+      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+      - ./logs/spark/spark-events:/opt/spark/spark-events
     depends_on:
       - spark-master
     networks:
       - big-data
+
+  spark-history-server:
+    image: spark:3.4.1-hadoop-3
+    container_name: spark-history-server
+    ports:
+      - 18080:18080
+    environment:
+      - SPARK_MODE=history
+    volumes:
+      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+      - ./logs/spark/spark-events:/opt/spark/spark-events
+    depends_on:
+      - spark-master
+    networks:
+      - big-data
+
 networks:
   big-data:
     external: true
