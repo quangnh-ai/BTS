@@ -1,4 +1,4 @@
-FROM spark:3.4.2-hadoop-3
+FROM spark:3.4.1-hadoop-3
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y install ffmpeg \

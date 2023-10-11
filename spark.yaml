@@ -8,7 +8,7 @@ services:
       - 8080:8080
       - 7077:7077
     volumes:
-      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+      # - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
       - ./workspace/pyspark:/opt/workspace
       - ./logs/spark/spark-events:/opt/spark/spark-events
     environment:
@@ -34,8 +34,8 @@ services:
       - SPARK_WORKER_WEBUI_PORT=9090
       - SPARK_WORKER_PORT=7000
       - SPARK_LOCAL_IP=spark-worker-1
-    volumes:
-      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+    # volumes:
+      # - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
       - ./logs/spark/spark-events:/opt/spark/spark-events
     depends_on:
       - spark-master
@@ -56,8 +56,8 @@ services:
       - SPARK_WORKER_WEBUI_PORT=9091
       - SPARK_WORKER_PORT=7001
       - SPARK_LOCAL_IP=spark-worker-2
-    volumes:
-      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+    # volumes:
+      # - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
       - ./logs/spark/spark-events:/opt/spark/spark-events
     depends_on:
       - spark-master
@@ -72,7 +72,7 @@ services:
     environment:
       - SPARK_MODE=history
     volumes:
-      - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
+      # - ./config/spark/spark-defaults.config:/opt/spark/config/spark-defaults.config
       - ./logs/spark/spark-events:/opt/spark/spark-events
     depends_on:
       - spark-master

@@ -34,7 +34,8 @@ RUN mkdir -p /opt/spark && \
     rm -rf apache-spark.tgz
 
 WORKDIR /opt/spark
-COPY ./spark-defaults.config /opt/spark/config/
+RUN mkdir /opt/spark/spark-events
+COPY ./spark-defaults.conf /opt/spark/conf/
 
 RUN pip install pyspark==3.4.1
 RUN wget -P /opt/spark/jars https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-core_2.12-2.4.0.jar
