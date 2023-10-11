@@ -9,3 +9,4 @@ config/jupyterlab/lab
 config/jupyterlab/migrated
 docker_local_workspace
 *.jar
+logs/*
