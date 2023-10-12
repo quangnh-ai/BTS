@@ -5,10 +5,10 @@ services:
     container_name: jupyterlab
     ports:
       - 8888:8888
-      - 4040-4045:4040-4045
     volumes:
       - ./workspace/jupyterlab:/opt/jupyterlab
       - ./config/jupyterlab:/root/.jupyter
+      - ./logs/spark/spark-events:/opt/spark/spark-events
     networks:
       - big-data
     

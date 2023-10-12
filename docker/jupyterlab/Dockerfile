@@ -14,7 +14,6 @@ RUN apt-get -y autoclean && \
 RUN pip install --upgrade setuptools \
                           wheel
 
-ENV PYSPARK_PYTHON=/usr/bin/python
                           
 WORKDIR /opt/jupyterlab
 RUN cd /opt/jupyterlab
