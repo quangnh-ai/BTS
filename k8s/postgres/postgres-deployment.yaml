@@ -20,7 +20,7 @@ spec:
             - containerPort: 5432 
           envFrom: 
             - configMapRef: 
-                name: postgres-config 
+                name: postgres-airflow-configs
           volumeMounts: 
             - mountPath: /var/lib/postgresql/data 
               name: postgredb 
