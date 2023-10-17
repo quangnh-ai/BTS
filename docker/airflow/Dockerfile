@@ -1,4 +1,4 @@
-FROM spark:3.3.2-hadoop-3
+FROM spark:3.4.1-hadoop-3
 
 ENV AIRFLOW_HOME=/opt/airflow
 ENV PYTHON_VERSION=3.10

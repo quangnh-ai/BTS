@@ -17,6 +17,11 @@ then
 
 cd /opt/spark/bin && ./spark-class org.apache.spark.deploy.history.HistoryServer >> $SPARK_HISTORY_LOG
 
+elif [ "$SPARK_MODE" =  "connect" ]
+then
+
+cd /opt/spark/bin
+
 elif [ "$SPARK_MODE" = "submit" ];
 then
 
@@ -24,6 +29,6 @@ echo "SPARK SUBMIT"
 
 else
 
-echo "Undefined Mode $SPARK_MODE, must specify: master, worker, submit"
+echo "Undefined Mode $SPARK_MODE, must specify: master, worker, submit, history, connect"
 
 fi

@@ -1,8 +1,7 @@
-ARG SPARK_VERSION=3.4.1
-ARG HADOOP_VERSION=3
+FROM python-jdk:python-3.10.11-jdk-11.0.16
 
-FROM python-jdk:python-3.10.11-jdk-11.10.16
-
+ENV SPARK_VERSION=3.4.1
+ENV HADOOP_VERSION=3
 ENV SPARK_HOME=/opt/spark
 ENV PATH=${SPARK_HOME}/bin:${PATH}
 ENV SPARK_MASTER_PORT=7077
@@ -26,8 +25,6 @@ RUN apt-get install -y wget \
                        build-essential \
                        libreadline-gplv2-dev
 
-ARG SPARK_VERSION
-ARG HADOOP_VERSION
 RUN wget --no-verbose -O apache-spark.tgz https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 RUN mkdir -p /opt/spark && \
     tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 && \
