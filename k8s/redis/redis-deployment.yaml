@@ -16,5 +16,7 @@ spec:
       - name: redis
         image: redis:alpine3.18
         imagePullPolicy: "IfNotPresent"
+        command: [redis-server]
+        args: ["--requirepass", "123456"]
         ports:
         - containerPort: 6379
