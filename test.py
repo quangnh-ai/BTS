@@ -7,5 +7,5 @@ r = redis.Redis(
     db='0'
 )
 
-r.set('foo', 'bar')
-print(r.get('foo'))
+r.set('quang', '123')
+print(r.get('quang'))
