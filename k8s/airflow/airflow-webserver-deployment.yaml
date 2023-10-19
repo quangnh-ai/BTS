@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
       - name: airflow-webserver
-        image: airflow:2.7.1-python-3.10.11
+        image:  airflow:2.7.1-python-3.10.11
+        imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 8080
         envFrom:
