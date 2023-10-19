@@ -20,4 +20,21 @@ spec:
         envFrom:
           - configMapRef:
               name: airflow-env
+        volumeMounts: 
+          - mountPath: /opt/airflow/dags
+            name: airflow-dags
+          - mountPath: /opt/airflow/logs
+            name: airflow-logs
+          - mountPath: /opt/airflow/plugins
+            name: airflow-plugins
         args: [webserver]
+      volumes:
+        - name: airflow-dags
+          persistentVolumeClaim: 
+            claimName: airflow-dags-pvc
+        - name: airflow-logs
+          persistentVolumeClaim:
+            claimName: airflow-logs-pvc
+        - name: airflow-plugins
+          persistentVolumeClaim:
+            claimName: airflow-plugins-pvc
