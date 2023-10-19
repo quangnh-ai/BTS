@@ -26,11 +26,10 @@ RUN mkdir logs
 RUN mkdir dags
 RUN mkdir plugins
 RUN useradd -ms /bin/bash airflow
-RUN chmod -R 777 /opt/airflow
-
 
 RUN chown -R airflow: ${AIRFLOW_HOME}
 USER airflow
+RUN chmod -R 777 /opt/airflow
 
 COPY ./entrypoint.sh entrypoint.sh
 ENTRYPOINT [ "/opt/airflow/entrypoint.sh" ]
