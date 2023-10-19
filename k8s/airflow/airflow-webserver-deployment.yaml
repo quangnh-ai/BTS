@@ -20,4 +20,4 @@ spec:
         envFrom:
           - configMapRef:
               name: airflow-env
-        command: [webserver]
+        args: [webserver]
