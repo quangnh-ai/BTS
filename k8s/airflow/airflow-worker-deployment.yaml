@@ -18,6 +18,13 @@ spec:
         envFrom:
           - configMapRef:
               name: airflow-env
+        volumeMounts: 
+          - mountPath: /opt/airflow/dags
+            name: airflow-dags
+          - mountPath: /opt/airflow/logs
+            name: airflow-logs
+          - mountPath: /opt/airflow/plugins
+            name: airflow-plugins
         args: [worker]
       volumes:
         - name: airflow-dags
