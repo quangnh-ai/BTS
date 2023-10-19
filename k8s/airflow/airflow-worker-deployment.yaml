@@ -19,3 +19,13 @@ spec:
           - configMapRef:
               name: airflow-env
         args: [worker]
+      volumes:
+        - name: airflow-dags
+          persistentVolumeClaim: 
+            claimName: airflow-dags-pvc
+        - name: airflow-logs
+          persistentVolumeClaim:
+            claimName: airflow-logs-pvc
+        - name: airflow-plugins
+          persistentVolumeClaim:
+            claimName: airflow-plugins-pvc
