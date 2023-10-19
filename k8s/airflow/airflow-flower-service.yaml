@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airflow-flower
+  labels:
+    app: airflow-flower
+spec:
+  selector:
+    app: airflow-flower
+  type: NodePort
+  ports:
+  - port: 5555
+    targetPort: 5555
+    nodePort: 30002

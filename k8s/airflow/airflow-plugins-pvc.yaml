@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: airflow-dags-pvc
+  name: airflow-plugins-pvc
 spec:
   storageClassName: manual
   resources:

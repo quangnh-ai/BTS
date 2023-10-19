@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: airflow-logs-pv
+  name: airflow-dags-pv
 spec:
   capacity:
     storage: 5Gi
@@ -11,4 +11,4 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: manual
   hostPath:
-    path: "/opt/airflow/logs"
+    path: "/opt/airflow/plugins"
