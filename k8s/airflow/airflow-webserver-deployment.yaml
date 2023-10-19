@@ -11,7 +11,8 @@ spec:
       labels:
         app: airflow-webserver
     spec:
-      securityContext:
+      SecurityContext:
+        runAsUser: 1001  
         fsGroup: 2000
       containers:
       - name: airflow-webserver
