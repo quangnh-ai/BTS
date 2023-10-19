@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-webserver
+spec:
+  selector:
+    matchLabels:
+      app: airflow-webserver
+  template:
+    metadata:
+      labels:
+        app: airflow-webserver
+    spec:
+      containers:
+      - name: airflow-webserver
+        image: airflow:2.7.1-python-3.10.11
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: airflow-env
+        command: [webserver]

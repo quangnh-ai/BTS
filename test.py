@@ -1,10 +1,11 @@
 import redis
 
 r = redis.Redis(
-    host='192.168.1.9',
-    port=31850,
+    host='100.78.237.90',
+    port=30000,
+    password='123456',
     db='0'
 )
 
 r.set('foo', 'bar')
-r.get('foo')
+print(r.get('foo'))

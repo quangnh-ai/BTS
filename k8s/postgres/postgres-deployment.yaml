@@ -13,17 +13,17 @@ spec:
         app: postgres 
     spec: 
       containers: 
-        - name: postgres 
-          image: postgres:13.1 
-          imagePullPolicy: "IfNotPresent" 
-          ports: 
-            - containerPort: 5432 
-          envFrom: 
-            - configMapRef: 
-                name: postgres-airflow-configs
-          volumeMounts: 
-            - mountPath: /var/lib/postgresql/data 
-              name: postgredb 
+      - name: postgres 
+        image: postgres:13.1 
+        imagePullPolicy: "IfNotPresent" 
+        ports: 
+          - containerPort: 5432 
+        envFrom: 
+          - configMapRef: 
+              name: postgres-airflow-configs
+        volumeMounts: 
+          - mountPath: /var/lib/postgresql/data 
+            name: postgredb 
       volumes: 
         - name: postgredb 
           persistentVolumeClaim: 
