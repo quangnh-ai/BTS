@@ -1,0 +1,1 @@
+kubectl apply -f airflow-scheduler-deployment.yaml -n airflow
