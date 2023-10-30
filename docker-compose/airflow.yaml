@@ -21,7 +21,7 @@ services:
     image: airflow:2.7.1-python-3.10.11
     container_name: airflow_webserver
     env_file:
-      - ./config/airflow/airflow.env
+      - ../config/airflow/airflow.env
     depends_on:
       - redis
       - postgres
@@ -34,7 +34,7 @@ services:
     image: airflow:2.7.1-python-3.10.11
     container_name: airflow_scheduler
     env_file:
-      - ./config/airflow/airflow.env
+      - ../config/airflow/airflow.env
     depends_on:
       - airflow_webserver
     command: scheduler
@@ -43,7 +43,7 @@ services:
     image: airflow:2.7.1-python-3.10.11
     container_name: airflow_flower
     env_file:
-      - ./config/airflow/airflow.env
+      - ../config/airflow/airflow.env
     ports:
       - 5555:5555
     depends_on:
@@ -54,7 +54,7 @@ services:
     image: airflow:2.7.1-python-3.10.11
     container_name: airflow_worker
     env_file:
-      - ./config/airflow/airflow.env
+      - ../config/airflow/airflow.env
     depends_on:
       - airflow_scheduler
     command: worker
